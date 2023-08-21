@@ -14,27 +14,38 @@ export default function App() {
 
   const sudokuNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-  const sudokuElements = sudokuArray.map(sudokuRow => {
-    return sudokuRow.map(sudokuCell => {
-      return <div class="sudoku-cell">{sudokuCell}</div>
-    })
-  })
+  const sudokuElements = sudokuArray.map((sudokuRow, rowIndex) => (
+    <tr key={rowIndex}>
+      {sudokuRow.map((sudokuCell, colIndex) => (
+        <td className="sudoku-cell" key={colIndex}>
+          {sudokuCell}
+        </td>
+      ))}
+    </tr>
+  ))  
 
   const sudokuNumbersElements = sudokuNumbers.map(sudokuNumber => {
-    return <button class="number-button">{sudokuNumber}</button>
+      return <td className="number-button">{sudokuNumber}</td> 
   })
 
 
   return (
     <div className="sudoku-container">
         <h1>Sudoku Game</h1>
-        <div class="sudoku-board">
-            {sudokuElements}            
-        </div>
-        <div class="number-buttons">
-            {sudokuNumbersElements}
-        </div>
-        <button class="new-game-btn">New Game</button>
+        <table className="sudoku-board">
+          <tbody>
+            {sudokuElements}
+          </tbody>
+        </table>
+        <table className="number-buttons">
+          <tbody>
+            <tr>
+              {sudokuNumbersElements}
+            </tr>
+          </tbody>
+        </table>
+        <button className="new-game-btn">New Game</button>
     </div>
+    
   );
 }

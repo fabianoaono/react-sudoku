@@ -19,18 +19,13 @@ body {
 
 .sudoku-board {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 2px;
   margin: 20px auto;
-  border: 2px solid #333;
-  padding: 4px;
+  padding: 0px 20px;
   max-width: 360px;
+  border-collapse: collapse;
 }
 
 .sudoku-cell {
-  width: 100%;
-  height: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
@@ -38,6 +33,26 @@ body {
   border: 1px solid #ddd;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+/* Add thicker lines for every 3x3 square */
+.sudoku-board td:nth-child(3n) {
+  border-right: 2px solid black;
+}
+
+.sudoku-board tr:nth-child(3n) {
+  border-bottom: 2px solid black;
+}
+
+.sudoku-board td:first-child {
+  border-left: 2px solid black;
+}
+
+.sudoku-board tr:first-child {
+  border-top: 2px solid black;
 }
 
 .sudoku-cell:hover {
@@ -59,25 +74,19 @@ body {
   background-color: #0056b3;
 }
 
-.sudoku-cell {
-  /* ... Previous styles ... */
-  min-width: 30px;
-  min-height: 30px;
-  box-sizing: border-box;
-}
-
 .number-buttons {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 5px;
-  margin: 10px auto;
+  margin: 20px auto;
+  padding: 0px 20px;
+  max-width: 360px;
+  border-collapse: collapse;
 }
 
 .number-button {
-  width: 100%;
-  padding: 10px;
+  height: 27px;
+  width: 27px;
   font-size: 1rem;
-  border: none;
+  border: 1px solid #000;
   background-color: #f0f0f0;
   cursor: pointer;
   transition: background-color 0.3s ease;
