@@ -36,6 +36,11 @@ body {
   width: 30px;
   height: 30px;
   box-sizing: border-box;
+  user-select: none;
+}
+
+.fixed {
+  font-weight: bold;
 }
 
 /* Add thicker lines for every 3x3 square */
@@ -57,6 +62,11 @@ body {
 
 .sudoku-cell:hover {
   background-color: #f0f0f0;
+}
+
+.fixed:hover {
+  background-color: #ffffff;
+  cursor: default;
 }
 
 .new-game-btn {
@@ -90,6 +100,7 @@ body {
   background-color: #f0f0f0;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  user-select: none;
 }
 
 .number-button:hover {
