@@ -18,6 +18,24 @@ export default function App() {
       [4, 0, 0, 1, 5, 9, 0, 0, 2],
       [0, 2, 1, 7, 0, 0, 4, 9, 0]
     ]
+
+  const [sudokuObjectsArray, setSudokuObjectsArray] = 
+    React.useState(sudokuArray.map((sudokuRow) => (
+        sudokuRow.map((sudokuCell) => (
+            sudokuCell === 0 ? 
+            {
+                value: "",
+                fixed: false
+            } :
+            {
+                value: sudokuCell,
+                fixed: true
+            }
+        ))
+      )
+    )
+  )
+
     /*
   const sudokuSolution = 
     [
@@ -34,14 +52,31 @@ export default function App() {
 */
 
   const handleSelectCell = (x, y) => {
-      setSelectedCell({x: x, y: y})
+    setSelectedCell({x: x, y: y})
+  }
+
+  const handleCommand = (x) => {
+    setSudokuObjectsArray(oldArray => {
+      const newArray = [...oldArray]
+      
+      const cell = newArray[selectedCell.x][selectedCell.y]
+      if (!cell.fixed) {
+        cell.value = x
+      }
+      console.log(selectedCell)
+      console.log(newArray)
+      return newArray
+    })
   }
 
   return (
     <div className="sudoku-container">
       <h1>Sudoku Game</h1>
-      <SudokuBoard sudokuArray={sudokuArray} selectedCell={selectedCell} selectCell={handleSelectCell}/>
-      <SudokuControl />
+      <SudokuBoard 
+        sudokuObjectsArray={sudokuObjectsArray} 
+        selectedCell={selectedCell} 
+        selectCell={handleSelectCell}/>
+      <SudokuControl command={handleCommand}/>
       <button className="new-game-btn">New Game</button>
     </div>
   );
