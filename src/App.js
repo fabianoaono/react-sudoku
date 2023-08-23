@@ -1,4 +1,10 @@
+import React from 'react'
+import SudokuBoard from './components/SudokuBoard';
+
 export default function App() {
+
+  const [selectedCell, setSelectedCell] = React.useState({x: undefined, y: undefined})
+
   const sudokuArray = 
     [
       [0, 8, 9, 0, 0, 5, 1, 4, 0],
@@ -11,7 +17,7 @@ export default function App() {
       [4, 0, 0, 1, 5, 9, 0, 0, 2],
       [0, 2, 1, 7, 0, 0, 4, 9, 0]
     ]
-
+    /*
   const sudokuSolution = 
     [
       [6, 8, 9, 3, 2, 5, 1, 4, 7],
@@ -24,50 +30,21 @@ export default function App() {
       [4, 3, 7, 1, 5, 9, 8, 6, 2],
       [5, 2, 1, 7, 8, 6, 4, 9, 3]
     ]
-
+*/
   const sudokuNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-  const sudokuObjectsArray = sudokuArray.map((sudokuRow) => (
-      sudokuRow.map((sudokuCell) => (
-        sudokuCell === 0 ? 
-        {
-          value: "",
-          fixed: true
-        } :
-        {
-          value: sudokuCell,
-          fixed: false
-        }
-      ))
-    )
-  )
-
-  const sudokuElements = sudokuObjectsArray.map((sudokuRow, rowIndex) => (
-    <tr key={rowIndex}>
-      {sudokuRow.map((sudokuCell, colIndex) => {
-        const className = sudokuCell.fixed ? "sudoku-cell" : "sudoku-cell fixed"
-        return (
-          <td className={className} key={colIndex}>
-            {sudokuCell.value}
-          </td>
-        )
-      })}
-    </tr>
-  ))  
-
-  const sudokuNumbersElements = sudokuNumbers.map(sudokuNumber => {
-      return <td className="number-button">{sudokuNumber}</td> 
+  const sudokuNumbersElements = sudokuNumbers.map((sudokuNumber, index) => {
+      return <td className="number-button" key={index}>{sudokuNumber}</td> 
   })
 
+  const handleSelectCell = (x, y) => {
+      setSelectedCell({x: x, y: y})
+  }
 
   return (
     <div className="sudoku-container">
         <h1>Sudoku Game</h1>
-        <table className="sudoku-board">
-          <tbody>
-            {sudokuElements}
-          </tbody>
-        </table>
+        <SudokuBoard sudokuArray={sudokuArray} selectedCell={selectedCell} selectCell={handleSelectCell}/>
         <table className="number-buttons">
           <tbody>
             <tr>
@@ -77,6 +54,5 @@ export default function App() {
         </table>
         <button className="new-game-btn">New Game</button>
     </div>
-    
   );
 }

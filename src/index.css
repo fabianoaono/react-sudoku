@@ -41,6 +41,11 @@ body {
 
 .fixed {
   font-weight: bold;
+  background-color: #f8efdc;
+}
+
+.selected-cell {
+  background-color: #a3d6ff;
 }
 
 /* Add thicker lines for every 3x3 square */
@@ -65,8 +70,12 @@ body {
 }
 
 .fixed:hover {
-  background-color: #ffffff;
+  background-color: #f8efdc;
   cursor: default;
+}
+
+.selected-cell:hover {
+  background-color: #a3d6ff;
 }
 
 .new-game-btn {
@@ -95,9 +104,10 @@ body {
 .number-button {
   height: 27px;
   width: 27px;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   border: 1px solid #000;
-  background-color: #f0f0f0;
+  background-color: #fff9f9;
   cursor: pointer;
   transition: background-color 0.3s ease;
   user-select: none;
