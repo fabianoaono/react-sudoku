@@ -1,5 +1,6 @@
 import React from 'react'
-import SudokuBoard from './components/SudokuBoard';
+import SudokuBoard from './components/SudokuBoard'
+import SudokuControl from './components/SudokuControl'
 
 export default function App() {
 
@@ -31,11 +32,6 @@ export default function App() {
       [5, 2, 1, 7, 8, 6, 4, 9, 3]
     ]
 */
-  const sudokuNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-  const sudokuNumbersElements = sudokuNumbers.map((sudokuNumber, index) => {
-      return <td className="number-button" key={index}>{sudokuNumber}</td> 
-  })
 
   const handleSelectCell = (x, y) => {
       setSelectedCell({x: x, y: y})
@@ -43,16 +39,10 @@ export default function App() {
 
   return (
     <div className="sudoku-container">
-        <h1>Sudoku Game</h1>
-        <SudokuBoard sudokuArray={sudokuArray} selectedCell={selectedCell} selectCell={handleSelectCell}/>
-        <table className="number-buttons">
-          <tbody>
-            <tr>
-              {sudokuNumbersElements}
-            </tr>
-          </tbody>
-        </table>
-        <button className="new-game-btn">New Game</button>
+      <h1>Sudoku Game</h1>
+      <SudokuBoard sudokuArray={sudokuArray} selectedCell={selectedCell} selectCell={handleSelectCell}/>
+      <SudokuControl />
+      <button className="new-game-btn">New Game</button>
     </div>
   );
 }
