@@ -55,16 +55,22 @@ export default function App() {
     setSelectedCell({x: x, y: y})
   }
 
-  const handleCommand = (x) => {
+  const handleWrite = (newValue) => {
+    changeCellValue(newValue)
+  }
+
+  const handleErase = () => {
+    changeCellValue("")
+  }
+  
+  const changeCellValue = (newValue) => {
     setSudokuObjectsArray(oldArray => {
       const newArray = [...oldArray]
       
       const cell = newArray[selectedCell.x][selectedCell.y]
       if (!cell.fixed) {
-        cell.value = x
+        cell.value = newValue
       }
-      console.log(selectedCell)
-      console.log(newArray)
       return newArray
     })
   }
@@ -76,7 +82,9 @@ export default function App() {
         sudokuObjectsArray={sudokuObjectsArray} 
         selectedCell={selectedCell} 
         selectCell={handleSelectCell}/>
-      <SudokuControl command={handleCommand}/>
+      <SudokuControl 
+        write={handleWrite} 
+        erase={handleErase}/>
       <button className="new-game-btn">New Game</button>
     </div>
   );

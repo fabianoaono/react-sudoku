@@ -75,7 +75,6 @@ body {
 
 .fixed:hover {
   background-color: #f8efdc;
-  cursor: default;
 }
 
 .selected-cell:hover {
@@ -97,7 +96,7 @@ body {
   background-color: #0056b3;
 }
 
-.number-buttons {
+.control-buttons {
   display: grid;
   margin: 20px auto;
   padding: 0px 20px;
@@ -105,7 +104,7 @@ body {
   border-collapse: collapse;
 }
 
-.number-button {
+.control-button {
   height: 27px;
   width: 27px;
   font-size: 1.2rem;
@@ -117,6 +116,6 @@ body {
   user-select: none;
 }
 
-.number-button:hover {
+.control-button:hover {
   background-color: #ddd;
 }
