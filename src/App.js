@@ -4,9 +4,9 @@ import SudokuControl from './components/SudokuControl'
 
 export default function App() {
 
-  const [selectedCell, setSelectedCell] = React.useState({x: undefined, y: undefined})
+  const [selectedCell, setSelectedCell] = React.useState({ x: undefined, y: undefined })
 
-  const sudokuArray = 
+  const sudokuArray =
     [
       [0, 8, 9, 0, 0, 5, 1, 4, 0],
       [3, 0, 0, 8, 1, 7, 0, 0, 6],
@@ -19,40 +19,40 @@ export default function App() {
       [0, 2, 1, 7, 0, 0, 4, 9, 0]
     ]
 
-  const [sudokuObjectsArray, setSudokuObjectsArray] = 
+  const [sudokuObjectsArray, setSudokuObjectsArray] =
     React.useState(sudokuArray.map((sudokuRow) => (
-        sudokuRow.map((sudokuCell) => (
-            sudokuCell === 0 ? 
-            {
-                value: "",
-                fixed: false
-            } :
-            {
-                value: sudokuCell,
-                fixed: true
-            }
-        ))
-      )
+      sudokuRow.map((sudokuCell) => (
+        sudokuCell === 0 ?
+          {
+            value: "",
+            fixed: false
+          } :
+          {
+            value: sudokuCell,
+            fixed: true
+          }
+      ))
     )
-  )
+    )
+    )
 
-    /*
-  const sudokuSolution = 
-    [
-      [6, 8, 9, 3, 2, 5, 1, 4, 7],
-      [3, 5, 4, 8, 1, 7, 9, 2, 6],
-      [7, 1, 2, 6, 9, 4, 3, 8, 5],
-      [2, 4, 3, 9, 7, 1, 6, 5, 8],
-      [9, 7, 8, 5, 6, 3, 2, 1, 4],
-      [1, 6, 5, 2, 4, 8, 7, 3, 9],
-      [8, 9, 6, 4, 3, 2, 5, 7, 1],
-      [4, 3, 7, 1, 5, 9, 8, 6, 2],
-      [5, 2, 1, 7, 8, 6, 4, 9, 3]
-    ]
+  /*
+const sudokuSolution = 
+  [
+    [6, 8, 9, 3, 2, 5, 1, 4, 7],
+    [3, 5, 4, 8, 1, 7, 9, 2, 6],
+    [7, 1, 2, 6, 9, 4, 3, 8, 5],
+    [2, 4, 3, 9, 7, 1, 6, 5, 8],
+    [9, 7, 8, 5, 6, 3, 2, 1, 4],
+    [1, 6, 5, 2, 4, 8, 7, 3, 9],
+    [8, 9, 6, 4, 3, 2, 5, 7, 1],
+    [4, 3, 7, 1, 5, 9, 8, 6, 2],
+    [5, 2, 1, 7, 8, 6, 4, 9, 3]
+  ]
 */
 
   const handleSelectCell = (x, y) => {
-    setSelectedCell({x: x, y: y})
+    setSelectedCell({ x: x, y: y })
   }
 
   const handleWrite = (newValue) => {
@@ -62,11 +62,11 @@ export default function App() {
   const handleErase = () => {
     changeCellValue("")
   }
-  
+
   const changeCellValue = (newValue) => {
     setSudokuObjectsArray(oldArray => {
       const newArray = [...oldArray]
-      
+
       const cell = newArray[selectedCell.x][selectedCell.y]
       if (!cell.fixed) {
         cell.value = newValue
@@ -78,13 +78,13 @@ export default function App() {
   return (
     <div className="sudoku-container">
       <h1>Sudoku Game</h1>
-      <SudokuBoard 
-        sudokuObjectsArray={sudokuObjectsArray} 
-        selectedCell={selectedCell} 
-        selectCell={handleSelectCell}/>
-      <SudokuControl 
-        write={handleWrite} 
-        erase={handleErase}/>
+      <SudokuBoard
+        sudokuObjectsArray={sudokuObjectsArray}
+        selectedCell={selectedCell}
+        selectCell={handleSelectCell} />
+      <SudokuControl
+        write={handleWrite}
+        erase={handleErase} />
       <button className="new-game-btn">New Game</button>
     </div>
   );
