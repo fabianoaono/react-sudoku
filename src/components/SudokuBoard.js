@@ -6,7 +6,7 @@ export default function SudokuBoard(props) {
         <tr key={rowIndex}>
             {sudokuRow.map((sudokuCell, colIndex) => {
                 let className = sudokuCell.fixed ? "sudoku-cell fixed" : "sudoku-cell"
-                if (rowIndex === props.selectedCell.x && colIndex === props.selectedCell.y) {
+                if (rowIndex === props.selectedCell.row && colIndex === props.selectedCell.col) {
                     className += " selected-cell"
                 }
                 return (

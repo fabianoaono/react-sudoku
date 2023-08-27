@@ -4,7 +4,20 @@ import SudokuControl from './components/SudokuControl'
 
 export default function App() {
 
-  const [selectedCell, setSelectedCell] = React.useState({ x: undefined, y: undefined })
+  const [selectedCell, setSelectedCell] = React.useState({ row: undefined, col: undefined })
+
+  const detectKeyDown = (e) => {
+    if (e.keyCode >= 49 && e.keyCode <= 57) { 
+      handleWrite(String.fromCharCode(e.keyCode))
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', detectKeyDown)
+    return () => {
+      document.removeEventListener('keydown', detectKeyDown);
+    };
+  }, [detectKeyDown])
 
   const sudokuArray =
     [
@@ -52,10 +65,11 @@ const sudokuSolution =
 */
 
   const handleSelectCell = (x, y) => {
-    setSelectedCell({ x: x, y: y })
+    setSelectedCell({ row: x, col: y })
   }
 
   const handleWrite = (newValue) => {
+    console.log(selectedCell)
     changeCellValue(newValue)
   }
 
@@ -64,15 +78,16 @@ const sudokuSolution =
   }
 
   const changeCellValue = (newValue) => {
-    setSudokuObjectsArray(oldArray => {
-      const newArray = [...oldArray]
-
-      const cell = newArray[selectedCell.x][selectedCell.y]
-      if (!cell.fixed) {
-        cell.value = newValue
-      }
-      return newArray
-    })
+    if (selectedCell.row !== undefined && selectedCell.col !== undefined) {
+      setSudokuObjectsArray(oldArray => {
+        const newArray = [...oldArray]
+        const cell = newArray[selectedCell.row][selectedCell.col]
+        if (!cell.fixed) {
+          cell.value = newValue
+        }
+        return newArray
+      })
+    }
   }
 
   return (
