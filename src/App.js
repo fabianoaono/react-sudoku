@@ -36,10 +36,26 @@ export default function App() {
     },
     Backspace() {
       changeCellValue("")
+    },
+    " "() {
+      changeCellValue("")
+    },
+    ArrowUp() {
+      changeSelectedCell(selectedCell.row - 1, selectedCell.col)
+    },
+    ArrowDown() {
+      changeSelectedCell(selectedCell.row + 1, selectedCell.col)
+    },
+    ArrowLeft() {
+      changeSelectedCell(selectedCell.row, selectedCell.col - 1)
+    },
+    ArrowRight() {
+      changeSelectedCell(selectedCell.row, selectedCell.col + 1)
     }
   }
 
   const detectKeyDown = (e) => {
+    console.log(e)
     const command = acceptedKeyInputs[e.key]
     if (command) {
       command()
@@ -99,7 +115,7 @@ const sudokuSolution =
 */
 
   const handleSelectCell = (x, y) => {
-    setSelectedCell({ row: x, col: y })
+    changeSelectedCell(x, y)
   }
 
   const handleWrite = (newValue) => {
@@ -108,6 +124,12 @@ const sudokuSolution =
 
   const handleErase = () => {
     changeCellValue("")
+  }
+
+  const changeSelectedCell = (x, y) => {
+    if (x >= 0 && x <= 8 && y >= 0 && y <= 8) {
+      setSelectedCell({ row: x, col: y })
+    }
   }
 
   const changeCellValue = (newValue) => {
