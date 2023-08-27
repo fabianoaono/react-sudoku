@@ -6,9 +6,43 @@ export default function App() {
 
   const [selectedCell, setSelectedCell] = React.useState({ row: undefined, col: undefined })
 
+  const acceptedKeyInputs = {
+    1() {
+      changeCellValue("1")
+    },
+    2() {
+      changeCellValue("2")
+    },
+    3() {
+      changeCellValue("3")
+    },
+    4() {
+      changeCellValue("4")
+    },
+    5() {
+      changeCellValue("5")
+    },
+    6() {
+      changeCellValue("6")
+    },
+    7() {
+      changeCellValue("7")
+    },
+    8() {
+      changeCellValue("8")
+    },
+    9() {
+      changeCellValue("9")
+    },
+    Backspace() {
+      changeCellValue("")
+    }
+  }
+
   const detectKeyDown = (e) => {
-    if (e.keyCode >= 49 && e.keyCode <= 57) { 
-      handleWrite(String.fromCharCode(e.keyCode))
+    const command = acceptedKeyInputs[e.key]
+    if (command) {
+      command()
     }
   }
 
@@ -69,7 +103,6 @@ const sudokuSolution =
   }
 
   const handleWrite = (newValue) => {
-    console.log(selectedCell)
     changeCellValue(newValue)
   }
 
