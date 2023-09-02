@@ -119,3 +119,11 @@ body {
 .control-button:hover {
   background-color: #ddd;
 }
+
+.active {
+  background-color: #84f052;
+}
+
+.active:hover {
+  background-color: #61b33b;
+}

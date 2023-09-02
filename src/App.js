@@ -9,6 +9,8 @@ export default function App() {
 
   const [gameOver, setGameOver] = React.useState(false)
 
+  const [markMode, setMarkMode] = React.useState(false)
+
   const acceptedKeyInputs = {
     1() {
       changeCellValue(1)
@@ -54,6 +56,12 @@ export default function App() {
     },
     ArrowRight() {
       changeSelectedCell(selectedCell.row, selectedCell.col + 1)
+    },
+    M() {
+      invertMark()
+    },
+    m() {
+      invertMark()
     }
   }
 
@@ -138,6 +146,14 @@ export default function App() {
     changeCellValue("")
   }
 
+  const handleToggleMark = () => {
+    invertMark()
+  }
+
+  const invertMark = () => {
+    setMarkMode(oldMark => !oldMark)
+  }
+
   const changeSelectedCell = (x, y) => {
     if (!gameOver && x >= 0 && x <= 8 && y >= 0 && y <= 8) {
       setSelectedCell({ row: x, col: y })
@@ -174,7 +190,9 @@ export default function App() {
         selectCell={handleSelectCell} />
       <SudokuControl
         write={handleWrite}
-        erase={handleErase} />
+        erase={handleErase}
+        markMode={markMode}
+        toggleMark={handleToggleMark} />
       <button className="new-game-btn">New Game</button>
     </div>
   );

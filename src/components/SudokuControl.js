@@ -7,6 +7,8 @@ export default function SudokuControl(props) {
             onClick={() => props.write(sudokuNumber)}>{sudokuNumber}</td>
     })
 
+    let classNameMarkMode = props.markMode ? "control-button active" : "control-button"
+
     return (
         <table className="control-buttons">
             <tbody>
@@ -16,7 +18,7 @@ export default function SudokuControl(props) {
                 <tr>
                     <td colSpan="3"></td>
                     <td className="control-button" colSpan="3" onClick={() => props.erase()}>Erase</td>
-                    <td colSpan="3"></td>
+                    <td className={classNameMarkMode} colSpan="3" onClick={() => props.toggleMark()}>Mark</td>
                 </tr>
             </tbody>
         </table>
