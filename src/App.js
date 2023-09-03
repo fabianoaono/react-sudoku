@@ -113,11 +113,15 @@ export default function App() {
         sudokuCell === 0 ?
           {
             value: "",
-            fixed: false
+            fixed: false,
+            marked: false,
+            markValues: []
           } :
           {
             value: sudokuCell,
-            fixed: true
+            fixed: true,
+            marked: false,
+            markValues: []
           }
       ))
     )
@@ -166,7 +170,22 @@ export default function App() {
         const newArray = [...oldArray]
         const cell = newArray[selectedCell.row][selectedCell.col]
         if (!cell.fixed) {
-          cell.value = newValue
+          if (newValue === "") {
+            cell.value = ""
+            cell.markValues = []
+          } else {
+            cell.marked = markMode
+            if (markMode) {
+              if (cell.markValues.includes(newValue)) {
+                cell.markValues = cell.markValues.filter(value => value != newValue)
+              } else {
+                cell.markValues.push(newValue)
+              }
+            } else {
+              cell.markValues = []
+              cell.value = newValue
+            }
+          }
         }
         return newArray
       })
