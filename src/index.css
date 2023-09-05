@@ -42,10 +42,11 @@ body {
   height: 30px;
   box-sizing: border-box;
   user-select: none;
+  color: #031991;
 }
 
 .fixed {
-  background-color: #f8efdc;
+  color: #000;
 }
 
 .marked-cell {
@@ -140,6 +141,6 @@ body {
 
 .mark {
   font-size: 0.5rem;
-  font-weight: normal;
+  font-weight: bold;
   margin: auto;
 }
