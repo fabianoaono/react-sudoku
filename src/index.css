@@ -59,6 +59,10 @@ body {
   grid-template-rows: repeat(3, minmax(8px, 8px));
 }
 
+.same-group-cell {
+  background-color: #f1f1f1;
+}
+
 .selected-cell {
   background-color: #a3d6ff;
 }
@@ -82,10 +86,6 @@ body {
 
 .sudoku-cell:hover {
   background-color: #f0f0f0;
-}
-
-.fixed:hover {
-  background-color: #f8efdc;
 }
 
 .selected-cell:hover {
