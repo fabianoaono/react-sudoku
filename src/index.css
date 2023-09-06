@@ -12,6 +12,11 @@ body {
   bottom: 0;
 }
 
+td {
+  padding: 0;
+  border: 0;
+}
+
 .sudoku-container {
   text-align: center;
   background-color: #fff;
@@ -27,6 +32,7 @@ body {
   padding: 0px 20px;
   max-width: 360px;
   border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .sudoku-cell {
@@ -55,8 +61,8 @@ body {
   user-select: none;
   display: grid;
   gap: 0px;
-  grid-template-columns: repeat(3, minmax(8px, 8px));
-  grid-template-rows: repeat(3, minmax(8px, 8px));
+  grid-template-columns: repeat(3, minmax(8px, auto));
+  grid-template-rows: repeat(3, minmax(8px, auto));
 }
 
 .same-group-cell {
@@ -66,6 +72,11 @@ body {
 .selected-cell {
   background-color: #a3d6ff;
 }
+
+.same-value-cell {
+  background-color: #a3d6ff;
+}
+
 
 /* Add thicker lines for every 3x3 square */
 .sudoku-board td:nth-child(3n) {
@@ -142,5 +153,8 @@ body {
 .mark {
   font-size: 0.5rem;
   font-weight: bold;
-  margin: auto;
+}
+
+.same-value-mark {
+  background-color: #a3d6ff;
 }

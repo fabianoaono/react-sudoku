@@ -2,30 +2,29 @@ import React from 'react'
 
 export default function SudokuBoard(props) {
 
-    const createMarkedElements = (markValues => {
-        const marks = []
-        for (let i = 1; i <= 9; i++) {
-            marks.push(<div className="mark" key={i}>{markValues.includes(i) ? i : ""}</div>)
-        }
-
-        return (
-            <div className="marked-cell">
-                {marks}
-            </div>
-        )
-    })
-
     const selectedRow = props.selectedCell.row
     const selectedCol = props.selectedCell.col
+    const selectedValue = selectedRow !== undefined && 
+        selectedCol !== undefined? 
+        props.sudokuObjectsArray[selectedRow][selectedCol].value :
+        undefined
 
-    const getClassName = ((sudokuCell, row, col) => {
+    const getCellClassName = ((sudokuCell, row, col) => {
         let className = sudokuCell.fixed ? "sudoku-cell fixed" : "sudoku-cell"
         if (isSelectedCell(row, col)) {
             className += " selected-cell"
+        } else if (isSameValue(row, col)) {
+            className += " same-value-cell"
         } else if (isSameRow(row) || isSameCol(col) || isSameSquare(row, col)) {
             className += " same-group-cell"
-        }
+        } 
         return className
+    })
+
+    const getMarkClassName = ((containsValue, value) => {
+        return selectedValue && containsValue && value === selectedValue ?
+            "mark same-value-mark" :
+            "mark"
     })
 
     const isSameRow = (row => {
@@ -48,10 +47,30 @@ export default function SudokuBoard(props) {
         return (rowSquare === selectedRowSquare && colSquare === selectedColSquare)
     }
 
+    const isSameValue = (row, col) => {
+        return selectedValue && props.sudokuObjectsArray[row][col].value === selectedValue
+    }
+
+    const createMarkedElements = (markValues => {
+        const marks = []
+
+        for (let i = 1; i <= 9; i++) {
+            const containsValue = markValues.includes(i)
+            let className = getMarkClassName(containsValue, i)
+            marks.push(<div className={className} key={i}>{containsValue ? i : ""}</div>)
+        }
+
+        return (
+            <div className="marked-cell">
+                {marks}
+            </div>
+        )
+    })
+
     const sudokuElements = props.sudokuObjectsArray.map((sudokuRow, rowIndex) => (
         <tr key={rowIndex}>
             {sudokuRow.map((sudokuCell, colIndex) => {
-                let className = getClassName(sudokuCell, rowIndex, colIndex)
+                let className = getCellClassName(sudokuCell, rowIndex, colIndex)
                 
                 let markedElements = []
                 if (sudokuCell.marked) {

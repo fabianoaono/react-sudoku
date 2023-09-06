@@ -177,7 +177,7 @@ export default function App() {
             cell.marked = markMode
             if (markMode) {
               if (cell.markValues.includes(newValue)) {
-                cell.markValues = cell.markValues.filter(value => value != newValue)
+                cell.markValues = cell.markValues.filter(value => value !== newValue)
               } else {
                 cell.markValues.push(newValue)
               }
