@@ -108,20 +108,22 @@ export default function App() {
   }
 
   const [sudokuObjectsArray, setSudokuObjectsArray] =
-    React.useState(sudokuGrid.values.map((sudokuRow) => (
-      sudokuRow.map((sudokuCell) => (
+    React.useState(sudokuGrid.values.map((sudokuRow, rowIndex) => (
+      sudokuRow.map((sudokuCell, colIndex) => (
         sudokuCell === 0 ?
           {
             value: "",
             fixed: false,
             marked: false,
-            markValues: []
+            markValues: [],
+            solution: sudokuGrid.solution[rowIndex][colIndex]
           } :
           {
             value: sudokuCell,
             fixed: true,
             marked: false,
-            markValues: []
+            markValues: [],
+            solution: sudokuGrid.solution[rowIndex][colIndex]
           }
       ))
     )

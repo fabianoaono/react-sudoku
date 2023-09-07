@@ -18,6 +18,10 @@ export default function SudokuBoard(props) {
         } else if (isSameRow(row) || isSameCol(col) || isSameSquare(row, col)) {
             className += " same-group-cell"
         } 
+
+        if (isWrongValue(sudokuCell)) {
+            className += " wrong-value"
+        }
         return className
     })
 
@@ -49,6 +53,10 @@ export default function SudokuBoard(props) {
 
     const isSameValue = (row, col) => {
         return selectedValue && props.sudokuObjectsArray[row][col].value === selectedValue
+    }
+
+    const isWrongValue = (sudokuCell) => {
+        return !sudokuCell.marked && sudokuCell.value !== sudokuCell.solution
     }
 
     const createMarkedElements = (markValues => {

@@ -77,6 +77,9 @@ td {
   background-color: #a3d6ff;
 }
 
+.wrong-value {
+  color: #ff0000;
+}
 
 /* Add thicker lines for every 3x3 square */
 .sudoku-board td:nth-child(3n) {
