@@ -214,7 +214,8 @@ export default function App() {
         erase={handleErase}
         markMode={markMode}
         toggleMark={handleToggleMark} />
-      <button className="new-game-btn">New Game</button>
+
+      {/*<button className="new-game-btn">New Game</button>*/}
     </div>
   );
 }
