@@ -39,6 +39,9 @@ export default function App() {
     9() {
       changeCellValue(9)
     },
+    Delete() {
+      changeCellValue("")
+    },
     Backspace() {
       changeCellValue("")
     },
