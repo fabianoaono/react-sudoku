@@ -56,7 +56,7 @@ export default function SudokuBoard(props) {
     }
 
     const isCorrectValue = (sudokuCell) => {
-        return !sudokuCell.marked && sudokuCell.value === sudokuCell.solution
+        return sudokuCell.marked && sudokuCell.value === sudokuCell.solution
     }
 
     const createMarkedElements = (markValues => {
