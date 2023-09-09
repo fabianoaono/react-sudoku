@@ -19,7 +19,7 @@ export default function SudokuBoard(props) {
             className += " same-group-cell"
         } 
 
-        if (isWrongValue(sudokuCell)) {
+        if (!isCorrectValue(sudokuCell)) {
             className += " wrong-value"
         }
         return className
@@ -55,8 +55,8 @@ export default function SudokuBoard(props) {
         return selectedValue && props.sudokuObjectsArray[row][col].value === selectedValue
     }
 
-    const isWrongValue = (sudokuCell) => {
-        return !sudokuCell.marked && sudokuCell.value !== sudokuCell.solution
+    const isCorrectValue = (sudokuCell) => {
+        return !sudokuCell.marked && sudokuCell.value === sudokuCell.solution
     }
 
     const createMarkedElements = (markValues => {
