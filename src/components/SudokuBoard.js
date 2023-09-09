@@ -18,7 +18,6 @@ export default function SudokuBoard(props) {
         } else if (isSameRow(row) || isSameCol(col) || isSameSquare(row, col)) {
             className += " same-group-cell"
         } 
-        console.log(sudokuCell)
         if (!isCorrectValue(sudokuCell)) {
             className += " wrong-value"
         }
