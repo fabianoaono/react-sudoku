@@ -205,29 +205,30 @@ export default function App() {
   const discardMarks = (newArray, newValue) => {
 
     const positionsToCheck = new Set()
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       // Adding same row cells
-      positionsToCheck.add(i * 8 + selectedCell.col)
+      positionsToCheck.add(i * 9 + selectedCell.col)
       // Adding same col cells
-      positionsToCheck.add(selectedCell.row * 8 + i)
+      positionsToCheck.add(selectedCell.row * 9 + i)
     }
 
     // Adding same square cells
     const selectedRowSquare = Math.floor(selectedCell.row / 3)
     const selectedColSquare = Math.floor(selectedCell.col / 3)
+    
     for (let i = selectedRowSquare * 3; i < (selectedRowSquare + 1) * 3; i++) {
       for (let j = selectedColSquare * 3; j < (selectedColSquare + 1) * 3; j++) {
-        positionsToCheck.add(i * 8 + j)
+        positionsToCheck.add(i * 9 + j)
       }
     }
     // Removing selected cell
-    positionsToCheck.delete(selectedCell.row * 8 + selectedCell.col)
+    positionsToCheck.delete(selectedCell.row * 9 + selectedCell.col)
 
     let indexes = Array.from(positionsToCheck).map(val => 
       {
         const container = {}
-        container.row = Math.floor(val / 8)
-        container.col = val % 8
+        container.row = Math.floor(val / 9)
+        container.col = val % 9
         return container
       }
     )
@@ -238,6 +239,7 @@ export default function App() {
         cell.markValues = cell.markValues.filter(val => val !== newValue)
       }
     })
+    
   }
 
   const checkGameOver = () => {
