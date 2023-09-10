@@ -196,9 +196,48 @@ export default function App() {
         } else {
           cell.markValues = []
           cell.value = newValue
+          discardMarks(newArray, newValue)
         }
       }
     }
+  }
+
+  const discardMarks = (newArray, newValue) => {
+
+    const positionsToCheck = new Set()
+    for (let i = 0; i < 8; i++) {
+      // Adding same row cells
+      positionsToCheck.add(i * 8 + selectedCell.col)
+      // Adding same col cells
+      positionsToCheck.add(selectedCell.row * 8 + i)
+    }
+
+    // Adding same square cells
+    const selectedRowSquare = Math.floor(selectedCell.row / 3)
+    const selectedColSquare = Math.floor(selectedCell.col / 3)
+    for (let i = selectedRowSquare * 3; i < (selectedRowSquare + 1) * 3; i++) {
+      for (let j = selectedColSquare * 3; j < (selectedColSquare + 1) * 3; j++) {
+        positionsToCheck.add(i * 8 + j)
+      }
+    }
+    // Removing selected cell
+    positionsToCheck.delete(selectedCell.row * 8 + selectedCell.col)
+
+    let indexes = Array.from(positionsToCheck).map(val => 
+      {
+        const container = {}
+        container.row = Math.floor(val / 8)
+        container.col = val % 8
+        return container
+      }
+    )
+
+    indexes.forEach(index => {
+      const cell = newArray[index.row][index.col]
+      if (cell.marked) {
+        cell.markValues = cell.markValues.filter(val => val !== newValue)
+      }
+    })
   }
 
   const checkGameOver = () => {
