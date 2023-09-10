@@ -173,27 +173,31 @@ export default function App() {
     if (!gameOver && selectedCell.row !== undefined && selectedCell.col !== undefined) {
       setSudokuObjectsArray(oldArray => {
         const newArray = [...oldArray]
-        const cell = newArray[selectedCell.row][selectedCell.col]
-        if (!cell.fixed) {
-          if (newValue === "") {
-            cell.value = ""
-            cell.markValues = []
-          } else {
-            cell.marked = markMode
-            if (markMode) {
-              if (cell.markValues.includes(newValue)) {
-                cell.markValues = cell.markValues.filter(value => value !== newValue)
-              } else {
-                cell.markValues.push(newValue)
-              }
-            } else {
-              cell.markValues = []
-              cell.value = newValue
-            }
-          }
-        }
+        updateSelectedValue(newArray, newValue)
         return newArray
       })
+    }
+  }
+
+  function updateSelectedValue(newArray, newValue) {
+    const cell = newArray[selectedCell.row][selectedCell.col]
+    if (!cell.fixed) {
+      if (newValue === "") {
+        cell.value = ""
+        cell.markValues = []
+      } else {
+        cell.marked = markMode
+        if (markMode) {
+          if (cell.markValues.includes(newValue)) {
+            cell.markValues = cell.markValues.filter(value => value !== newValue)
+          } else {
+            cell.markValues.push(newValue)
+          }
+        } else {
+          cell.markValues = []
+          cell.value = newValue
+        }
+      }
     }
   }
 
